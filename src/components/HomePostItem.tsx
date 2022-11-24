@@ -1,35 +1,12 @@
 import Link from "next/link";
 import styles from "../../styles/HomePostItem.module.css";
 import { Hit } from "../interfaces/search-result";
+import { getRelativeTime } from "../utils/get-relative-time";
 
 export default function HomePostItem({ post }: { post: Hit }) {
   const postLink = "/post/" + post.objectID;
 
-  // Calculate relative time
-  const getRelativeTime = () => {
-    const postAge = +new Date() - post.created_at_i * 1000;
-
-    let formattedPostAge = postAge / 1000 / 60;
-    if (formattedPostAge < 1) return "Just posted";
-    if (formattedPostAge < 60)
-      return Math.round(formattedPostAge) + " minutes ago";
-
-    formattedPostAge /= 60;
-    if (formattedPostAge < 24)
-      return Math.round(formattedPostAge) + " hours ago";
-
-    formattedPostAge /= 24;
-    if (formattedPostAge < 30)
-      return Math.round(formattedPostAge) + " days ago";
-
-    formattedPostAge /= 30;
-    if (formattedPostAge < 12)
-      return Math.round(formattedPostAge) + " months ago";
-
-    formattedPostAge /= 12;
-    return Math.round(formattedPostAge) + " years ago";
-  };
-  let relativeTime = getRelativeTime();
+  let relativeTime = getRelativeTime(post.created_at_i);
 
   return (
     <li className={styles.post}>
