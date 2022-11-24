@@ -2,10 +2,11 @@ import Head from "next/head";
 import Link from "next/link";
 import HomePostItem from "../src/components/HomePostItem";
 import { BASE_URL } from "../src/constants";
+import { SearchResult } from "../src/interfaces/search-result";
 import styles from "../styles/Home.module.css";
 
 interface IHomeProps {
-  data: any;
+  data: SearchResult;
 }
 
 export default function Home({ data }: IHomeProps) {
@@ -32,7 +33,7 @@ export default function Home({ data }: IHomeProps) {
       </header>
 
       <ul className={styles.postlist}>
-        {data.hits.map((post: any) => (
+        {data.hits.map((post) => (
           <HomePostItem key={post.objectID} post={post} />
         ))}
       </ul>
