@@ -1,9 +1,8 @@
 import Head from "next/head";
 import Link from "next/link";
 import HomePostItem from "../src/components/HomePostItem";
+import { BASE_URL } from "../src/constants";
 import styles from "../styles/Home.module.css";
-
-const BASE_URL = "https://hn.algolia.com/api/v1";
 
 interface IHomeProps {
   data: any;
@@ -43,7 +42,7 @@ export default function Home({ data }: IHomeProps) {
 
 export async function getServerSideProps(context: any) {
   const searchText = "web3";
-  let result = await fetch(`${BASE_URL}/search?query=${searchText}`);
+  let result = await fetch(`${BASE_URL}/v1/search?query=${searchText}`);
   result = await result.json();
 
   return {
