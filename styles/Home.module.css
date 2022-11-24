@@ -32,27 +32,3 @@
   padding: 16px;
   margin: 0;
 }
-
-.post {
-  margin-top: 8px;
-  margin-bottom: 8px;
-  color: var(--gray);
-  list-style: none;
-}
-.post a:hover {
-  text-decoration: underline;
-}
-.post__title {
-  color: black;
-}
-.post__name:hover {
-  /* `.post a:hover` has higher specificity than this class declaration, so `important` is required here */
-  text-decoration: none !important;
-}
-.post__url {
-  color: var(--gray-light);
-  font-size: 0.9rem;
-}
-.post__subtitle {
-  font-size: 0.75rem;
-}

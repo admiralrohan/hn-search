@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+import HomePostItem from "../src/components/HomePostItem";
 import styles from "../styles/Home.module.css";
 
 const BASE_URL = "https://hn.algolia.com/api/v1";
@@ -33,34 +34,7 @@ export default function Home({ data }: IHomeProps) {
 
       <ul className={styles.postlist}>
         {data.hits.map((post: any) => (
-          <li key={post.objectID} className={styles.post}>
-            <div className={styles.post__title}>
-              <Link
-                href={"/post/" + post.objectID}
-                className={styles.post__name}
-              >
-                {post.title}
-              </Link>{" "}
-              (
-              <Link
-                href={post.url}
-                target="_blank"
-                className={styles.post__url}
-              >
-                {post.url}
-              </Link>
-              )
-            </div>
-
-            <div className={styles.post__subtitle}>
-              <Link href={"/post/" + post.objectID}>{post.points} points</Link>{" "}
-              | {post.author} |{" "}
-              <Link href={"/post/" + post.objectID}>11 months ago</Link> |{" "}
-              <Link href={"/post/" + post.objectID}>
-                {post.num_comments} comments
-              </Link>
-            </div>
-          </li>
+          <HomePostItem key={post.objectID} post={post} />
         ))}
       </ul>
     </div>
