@@ -1,8 +1,8 @@
 import Head from "next/head";
 import Link from "next/link";
-import React, { FormEventHandler, useEffect, useState } from "react";
+import React, { FormEventHandler, useEffect, useRef, useState } from "react";
 import HomePostItem from "../src/components/HomePostItem";
-import { BASE_URL } from "../src/constants";
+import { BASE_URL, DEBOUNCE_DELAY } from "../src/constants";
 import { SearchResult } from "../src/interfaces/search-result";
 import styles from "../styles/Home.module.css";
 
@@ -14,6 +14,7 @@ export default function Home() {
     setSearchTerm((evt.target as HTMLInputElement).value);
   };
 
+  let timerID = useRef<NodeJS.Timeout>();
   useEffect(() => {
     const fetchResults = async () => {
       let result = await fetch(`${BASE_URL}/v1/search?query=${searchTerm}`);
@@ -22,10 +23,11 @@ export default function Home() {
       setData(data);
     };
 
-    fetchResults();
+    clearTimeout(timerID.current);
+    timerID.current = setTimeout(() => {
+      fetchResults();
+    }, DEBOUNCE_DELAY);
   }, [searchTerm]);
-
-  console.log(data);
 
   return (
     <div className={styles.container}>
