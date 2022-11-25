@@ -32,7 +32,7 @@ export default function Home() {
         setData(data);
       } else {
         setRequestStatus("error");
-        setData({ hits: [] } as any);
+        setData(undefined);
       }
     };
 
@@ -75,6 +75,10 @@ export default function Home() {
               <HomePostItem key={post.objectID} post={post} />
             ))}
           </ul>
+        )}
+
+        {requestStatus === "error" && (
+          <AlertLayout content="Some error occurred, refresh the page" />
         )}
       </main>
     </div>
