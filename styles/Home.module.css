@@ -26,9 +26,12 @@
   border: 0;
 }
 
-.postlist {
-  min-height: 100vh;
+.main {
+  /* 48px is the height of header */
+  min-height: calc(100vh - 48px);
   background: var(--secondary);
+}
+.postlist {
   padding: 16px;
   margin: 0;
 }

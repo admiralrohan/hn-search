@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import React, { FormEventHandler, useEffect, useRef, useState } from "react";
+import AlertLayout from "../src/components/AlertLayout";
 import HomePostItem from "../src/components/HomePostItem";
 import { BASE_URL, DEBOUNCE_DELAY } from "../src/constants";
 import useDebounce from "../src/hooks/useDebounce";
@@ -10,6 +11,9 @@ import styles from "../styles/Home.module.css";
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
   const [data, setData] = useState<SearchResult>();
+  const [requestStatus, setRequestStatus] = useState<
+    "idle" | "loading" | "error" | "success"
+  >("idle");
 
   const onSearchTermChange: FormEventHandler<HTMLInputElement> = (evt) => {
     setSearchTerm((evt.target as HTMLInputElement).value);
@@ -18,14 +22,21 @@ export default function Home() {
   const debouncedSearchTerm = useDebounce<string>(searchTerm, DEBOUNCE_DELAY);
   useEffect(() => {
     const fetchResults = async () => {
-      let result = await fetch(
+      const result = await fetch(
         `${BASE_URL}/v1/search?query=${debouncedSearchTerm}`
       );
       const data = await result.json();
 
-      setData(data);
+      if (result.status < 300) {
+        setRequestStatus("success");
+        setData(data);
+      } else {
+        setRequestStatus("error");
+        setData({ hits: [] } as any);
+      }
     };
 
+    setRequestStatus("loading");
     fetchResults();
   }, [debouncedSearchTerm]);
 
@@ -51,12 +62,21 @@ export default function Home() {
         </div>
       </header>
 
-      <ul className={styles.postlist}>
-        {data &&
-          data.hits.map((post) => (
-            <HomePostItem key={post.objectID} post={post} />
-          ))}
-      </ul>
+      <main className={styles.main}>
+        {requestStatus === "loading" && <AlertLayout content="Loading..." />}
+
+        {requestStatus === "success" && data && data.hits.length === 0 && (
+          <AlertLayout content="No result found" />
+        )}
+
+        {requestStatus === "success" && data && data.hits.length > 0 && (
+          <ul className={styles.postlist}>
+            {data.hits.map((post) => (
+              <HomePostItem key={post.objectID} post={post} />
+            ))}
+          </ul>
+        )}
+      </main>
     </div>
   );
 }
