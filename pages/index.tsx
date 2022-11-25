@@ -1,16 +1,31 @@
 import Head from "next/head";
 import Link from "next/link";
+import React, { FormEventHandler, useEffect, useState } from "react";
 import HomePostItem from "../src/components/HomePostItem";
 import { BASE_URL } from "../src/constants";
 import { SearchResult } from "../src/interfaces/search-result";
 import styles from "../styles/Home.module.css";
 
-interface IHomeProps {
-  data: SearchResult;
-}
+export default function Home() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [data, setData] = useState<SearchResult>();
 
-export default function Home({ data }: IHomeProps) {
-  console.log(data.hits[0]);
+  const onSearchTermChange: FormEventHandler<HTMLInputElement> = (evt) => {
+    setSearchTerm((evt.target as HTMLInputElement).value);
+  };
+
+  useEffect(() => {
+    const fetchResults = async () => {
+      let result = await fetch(`${BASE_URL}/v1/search?query=${searchTerm}`);
+      const data = await result.json();
+
+      setData(data);
+    };
+
+    fetchResults();
+  }, [searchTerm]);
+
+  console.log(data);
 
   return (
     <div className={styles.container}>
@@ -28,27 +43,18 @@ export default function Home({ data }: IHomeProps) {
           <input
             type="text"
             placeholder="Search stories by title, url, or author"
+            value={searchTerm}
+            onInput={onSearchTermChange}
           />
         </div>
       </header>
 
       <ul className={styles.postlist}>
-        {data.hits.map((post) => (
-          <HomePostItem key={post.objectID} post={post} />
-        ))}
+        {data &&
+          data.hits.map((post) => (
+            <HomePostItem key={post.objectID} post={post} />
+          ))}
       </ul>
     </div>
   );
-}
-
-export async function getServerSideProps(context: any) {
-  const searchText = "web3";
-  let result = await fetch(`${BASE_URL}/v1/search?query=${searchText}`);
-  result = await result.json();
-
-  return {
-    props: {
-      data: result,
-    },
-  };
 }
