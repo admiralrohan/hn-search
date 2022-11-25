@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { FormEventHandler, useEffect, useRef, useState } from "react";
 import HomePostItem from "../src/components/HomePostItem";
 import { BASE_URL, DEBOUNCE_DELAY } from "../src/constants";
+import useDebounce from "../src/hooks/useDebounce";
 import { SearchResult } from "../src/interfaces/search-result";
 import styles from "../styles/Home.module.css";
 
@@ -14,20 +15,19 @@ export default function Home() {
     setSearchTerm((evt.target as HTMLInputElement).value);
   };
 
-  let timerID = useRef<NodeJS.Timeout>();
+  const debouncedSearchTerm = useDebounce<string>(searchTerm, DEBOUNCE_DELAY);
   useEffect(() => {
     const fetchResults = async () => {
-      let result = await fetch(`${BASE_URL}/v1/search?query=${searchTerm}`);
+      let result = await fetch(
+        `${BASE_URL}/v1/search?query=${debouncedSearchTerm}`
+      );
       const data = await result.json();
 
       setData(data);
     };
 
-    clearTimeout(timerID.current);
-    timerID.current = setTimeout(() => {
-      fetchResults();
-    }, DEBOUNCE_DELAY);
-  }, [searchTerm]);
+    fetchResults();
+  }, [debouncedSearchTerm]);
 
   return (
     <div className={styles.container}>
