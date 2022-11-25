@@ -21,7 +21,7 @@ export interface Exhaustive {
 export interface Hit {
   created_at: Date;
   title: string;
-  url: string;
+  url: string | null;
   author: string;
   points: number;
   story_text: null;

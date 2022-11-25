@@ -14,11 +14,11 @@ export default function HomePostItem({ post }: { post: Hit }) {
         <Link href={postLink} className={styles.post__name}>
           {post.title}
         </Link>{" "}
-        (
-        <Link href={post.url} target="_blank" className={styles.post__url}>
-          {post.url}
-        </Link>
-        )
+        {post.url && (
+          <Link href={post.url} target="_blank" className={styles.post__url}>
+            {post.url}
+          </Link>
+        )}
       </div>
 
       <div className={styles.post__subtitle}>
