@@ -1,5 +1,4 @@
-import Head from "next/head";
-import React, { FormEventHandler, useEffect, useRef, useState } from "react";
+import React, { FormEventHandler, useEffect, useState } from "react";
 import AlertLayout from "../src/components/AlertLayout";
 import Header from "../src/components/Header";
 import HomePostItem from "../src/components/HomePostItem";
@@ -42,12 +41,6 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      <Head>
-        <title>HN Search</title>
-        <meta name="description" content="Search hacker news" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <Header searchTerm={searchTerm} onSearchTermChange={onSearchTermChange} />
 
       <main className={styles.main}>
