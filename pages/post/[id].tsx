@@ -1,30 +1,13 @@
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import Comments from "../../src/components/Comments";
 import { BASE_URL } from "../../src/constants";
 import { PostDetail } from "../../src/interfaces/post-detail";
 import styles from "../../styles/Post.module.css";
 
 interface IPostProps {
   data: PostDetail;
-}
-
-function Comment({ comment }: { comment: PostDetail }) {
-  return (
-    <li key={comment.id}>
-      <div className={styles.comment__title}>
-        <span dangerouslySetInnerHTML={{ __html: "&#8594;" }} />{" "}
-        {comment.author} on {comment.created_at.toString()}
-      </div>
-      <div dangerouslySetInnerHTML={{ __html: comment.text || "" }} />
-
-      <ol className={styles.comment}>
-        {comment.children.map((comment1) => (
-          <Comment key={comment1.id} comment={comment1} />
-        ))}
-      </ol>
-    </li>
-  );
 }
 
 export default function Post({ data: post }: IPostProps) {
@@ -64,11 +47,7 @@ export default function Post({ data: post }: IPostProps) {
           <Link href={postLink}>{post.children.length} comments</Link>
         </div>
 
-        <ol className={[styles.comment, styles.comment__first].join(" ")}>
-          {post.children.map((comment) => (
-            <Comment key={comment.id} comment={comment} />
-          ))}
-        </ol>
+        <Comments comments={post.children} isFirstComment={true} />
       </main>
     </div>
   );
