@@ -30,6 +30,8 @@ export default function Comments({
 }
 
 export function Comment({ comment }: ICommentProps) {
+  if (!comment.text) return null;
+
   return (
     <li key={comment.id}>
       <div className={styles.comment__title}>
