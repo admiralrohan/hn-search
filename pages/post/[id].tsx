@@ -1,5 +1,6 @@
 import { GetServerSideProps } from "next";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import Comments from "../../src/components/Comments";
 import Header from "../../src/components/Header";
 import { BASE_URL } from "../../src/constants";
@@ -12,6 +13,12 @@ interface IPostProps {
 }
 
 export default function Post({ data: post }: IPostProps) {
+  const [isPageRendered, setIsPageRendered] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsPageRendered(true);
+  }, []);
+
   return (
     <div className={styles.container}>
       <Header showSearchBox={false} />
@@ -53,7 +60,9 @@ export default function Post({ data: post }: IPostProps) {
           {getFormattedDate(post.created_at)} | {post.children.length} comments
         </div>
 
-        <Comments comments={post.children} isFirstComment={true} />
+        {isPageRendered && (
+          <Comments comments={post.children} isFirstComment={true} />
+        )}
       </main>
     </div>
   );
