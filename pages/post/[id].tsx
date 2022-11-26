@@ -12,8 +12,6 @@ interface IPostProps {
 }
 
 export default function Post({ data: post }: IPostProps) {
-  const postLink = "/post/" + post.id;
-
   return (
     <div className={styles.container}>
       <Header showSearchBox={false} />
@@ -52,8 +50,7 @@ export default function Post({ data: post }: IPostProps) {
 
         <div className={styles.post__subtitle}>
           {post.points} points by {post.author} on{" "}
-          <Link href={postLink}>{getFormattedDate(post.created_at)}</Link> |{" "}
-          <Link href={postLink}>{post.children.length} comments</Link>
+          {getFormattedDate(post.created_at)} | {post.children.length} comments
         </div>
 
         <Comments comments={post.children} isFirstComment={true} />
