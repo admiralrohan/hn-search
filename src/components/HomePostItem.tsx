@@ -12,6 +12,7 @@ export default function HomePostItem({ post }: { post: Hit }) {
   return (
     <li className={styles.post}>
       <div className={styles.post__title}>
+        {/* {post.url && */}
         <Link href={postLink} className={styles.post__name}>
           {post.title}
         </Link>{" "}
@@ -19,6 +20,9 @@ export default function HomePostItem({ post }: { post: Hit }) {
           <Link href={post.url} target="_blank" className={styles.post__url}>
             {post.url}
           </Link>
+        )}
+        {!post.title && (
+          <div dangerouslySetInnerHTML={{ __html: post.story_text || "" }} />
         )}
       </div>
 
