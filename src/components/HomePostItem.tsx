@@ -3,6 +3,7 @@ import styles from "../../styles/HomePostItem.module.css";
 import { Hit } from "../interfaces/search-result";
 import { getRelativeTime } from "../utils/get-relative-time";
 
+/** Used in home page */
 export default function HomePostItem({ post }: { post: Hit }) {
   const postLink = "/post/" + post.objectID;
 
