@@ -1,0 +1,23 @@
+.pagination {
+  list-style: none;
+  width: fit-content;
+  margin: 0 auto;
+  padding-bottom: 16px;
+  display: flex;
+  gap: 8px;
+  color: #9d9d9d;
+  align-items: stretch;
+}
+
+.page__item {
+  border: 1px solid;
+  padding: 0 10px;
+  line-height: 1.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.page__item.active {
+  /* It will automatically reflect into border-color */
+  color: var(--primary);
+}

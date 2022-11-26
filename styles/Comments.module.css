@@ -1,0 +1,16 @@
+.comment {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-left: 24px;
+  font-size: 0.9rem;
+}
+.comment__first {
+  /* To offset the left space for top-most comment */
+  padding: 0;
+}
+.comment__title {
+  font-size: 0.75rem;
+  margin-bottom: -12px;
+  color: var(--gray);
+}

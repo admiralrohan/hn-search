@@ -15,7 +15,7 @@ a {
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
@@ -23,4 +23,17 @@ a {
     color: white;
     background: black;
   }
+} */
+
+:root {
+  --primary: #ff742b;
+  --secondary: #f6f6ef;
+  --gray: #696969;
+  --gray-light: #828282;
+}
+
+body {
+  background: black;
+  /* During Loading state it hides the scroll then it comes back, which creates a flickering effect. So we are keeping the scroll all the time to stop that effect. */
+  overflow-y: scroll;
 }
