@@ -4,7 +4,7 @@ import Comments from "../../src/components/Comments";
 import Header from "../../src/components/Header";
 import { BASE_URL } from "../../src/constants";
 import { PostDetail } from "../../src/interfaces/post-detail";
-import { getFormattedDate } from "../../src/utils/get-formatted-date";
+import { getFormattedDate } from "../../src/utils/get-formatted-time";
 import styles from "../../styles/Post.module.css";
 
 interface IPostProps {

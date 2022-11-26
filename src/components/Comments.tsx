@@ -1,6 +1,6 @@
 import { PostDetail } from "../interfaces/post-detail";
 import styles from "../../styles/Comments.module.css";
-import { getFormattedDate } from "../utils/get-formatted-date";
+import { getFormattedDate } from "../utils/get-formatted-time";
 
 interface ICommentsProps {
   comments: PostDetail[];
