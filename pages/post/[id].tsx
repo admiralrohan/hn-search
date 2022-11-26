@@ -4,6 +4,7 @@ import Comments from "../../src/components/Comments";
 import Header from "../../src/components/Header";
 import { BASE_URL } from "../../src/constants";
 import { PostDetail } from "../../src/interfaces/post-detail";
+import { getFormattedDate } from "../../src/utils/get-formatted-date";
 import styles from "../../styles/Post.module.css";
 
 interface IPostProps {
@@ -11,7 +12,6 @@ interface IPostProps {
 }
 
 export default function Post({ data: post }: IPostProps) {
-  console.log(post);
   const postLink = "/post/" + post.id;
 
   return (
@@ -31,9 +31,8 @@ export default function Post({ data: post }: IPostProps) {
         </div>
 
         <div className={styles.post__subtitle}>
-          {/* 180 points by jgrahamc on Oct 1, 2021 | hide | past | favorite | 143 comments */}
           {post.points} points by {post.author} on{" "}
-          <Link href={postLink}>{post.created_at.toString()}</Link> |{" "}
+          <Link href={postLink}>{getFormattedDate(post.created_at)}</Link> |{" "}
           <Link href={postLink}>{post.children.length} comments</Link>
         </div>
 

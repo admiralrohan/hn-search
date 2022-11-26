@@ -1,5 +1,6 @@
 import { PostDetail } from "../interfaces/post-detail";
 import styles from "../../styles/Comments.module.css";
+import { getFormattedDate } from "../utils/get-formatted-date";
 
 interface ICommentsProps {
   comments: PostDetail[];
@@ -33,7 +34,7 @@ export function Comment({ comment }: ICommentProps) {
     <li key={comment.id}>
       <div className={styles.comment__title}>
         <span dangerouslySetInnerHTML={{ __html: "&#8594;" }} />{" "}
-        {comment.author} on {comment.created_at.toString()}
+        {comment.author} on {getFormattedDate(comment.created_at)}
       </div>
       <div dangerouslySetInnerHTML={{ __html: comment.text || "" }} />
 
