@@ -25,24 +25,25 @@ export default function Post({ data: post }: IPostProps) {
 
       <main className={styles.main}>
         <div className={styles.post__title}>
-          {post.url && (
-            <>
-              <Link href={post.url} className={styles.post__name}>
-                {post.title}
-              </Link>{" "}
-              <Link
-                href={post.url}
-                target="_blank"
-                className={styles.post__url}
-              >
-                {post.url}
-              </Link>
-            </>
-          )}
+          {post.title &&
+            (post.url ? (
+              <>
+                <Link href={post.url} className={styles.post__name}>
+                  {post.title}
+                </Link>{" "}
+                <Link
+                  href={post.url}
+                  target="_blank"
+                  className={styles.post__url}
+                >
+                  {post.url}
+                </Link>
+              </>
+            ) : (
+              <div className={styles.post__name}>{post.title}</div>
+            ))}
 
-          {post.title && <div className={styles.post__name}>{post.title}</div>}
-
-          {/* Only remove top and bottom margins if post has no title */}
+          {/* Remove top and bottom margins if post has no title */}
           {post.text && (
             <div
               dangerouslySetInnerHTML={{ __html: post.text }}
