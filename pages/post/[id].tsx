@@ -41,8 +41,8 @@ export default function Post({ data: post }: IPostProps) {
               dangerouslySetInnerHTML={{ __html: post.text }}
               className={
                 post.title
-                  ? [styles["remove-margin"], styles.post__body].join(" ")
-                  : styles["remove-margin"]
+                  ? ["remove-margin", styles.post__body].join(" ")
+                  : "remove-margin"
               }
             />
           )}
