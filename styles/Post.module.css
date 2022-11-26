@@ -1,0 +1,76 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  padding: 8px 16px;
+  background-color: var(--primary);
+}
+
+.logo {
+  font-size: 1.5rem;
+}
+
+.main {
+  /* 48px is the height of header */
+  min-height: calc(100vh - 48px);
+  background: var(--secondary);
+  padding: 16px;
+  /* margin: 0; */
+}
+/* .postlist {
+  padding: 16px;
+  margin: 0;
+} */
+
+.post {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  color: var(--gray);
+  list-style: none;
+}
+.post a:hover {
+  text-decoration: underline;
+}
+.post__title {
+  color: black;
+}
+.post__name:hover {
+  /* `.post a:hover` has higher specificity than this class declaration, so `important` is required here */
+  text-decoration: none !important;
+}
+.post__url {
+  color: var(--gray-light);
+  font-size: 0.9rem;
+}
+.post__url::before {
+  content: "(";
+}
+.post__url::after {
+  content: ")";
+}
+.post__subtitle {
+  font-size: 0.75rem;
+  color: var(--gray);
+  margin-bottom: 32px;
+}
+
+.comment {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-left: 24px;
+  font-size: 0.9rem;
+  /* border: solid red; */
+}
+.comment__first {
+  /* To offset the left space for top-most comment */
+  padding: 0;
+}
+.comment__title {
+  font-size: 0.75rem;
+  margin-bottom: -12px;
+  color: var(--gray);
+}
