@@ -18,12 +18,7 @@
   min-height: calc(100vh - 48px);
   background: var(--secondary);
   padding: 16px;
-  /* margin: 0; */
 }
-/* .postlist {
-  padding: 16px;
-  margin: 0;
-} */
 
 .post {
   margin-top: 8px;
