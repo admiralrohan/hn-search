@@ -2,6 +2,7 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import Comments from "../../src/components/Comments";
+import Header from "../../src/components/Header";
 import { BASE_URL } from "../../src/constants";
 import { PostDetail } from "../../src/interfaces/post-detail";
 import styles from "../../styles/Post.module.css";
@@ -22,11 +23,7 @@ export default function Post({ data: post }: IPostProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header className={styles.header}>
-        <div className={styles.logo}>
-          <Link href={"/"}>HN Search</Link>
-        </div>
-      </header>
+      <Header showSearchBox={false} />
 
       <main className={styles.main}>
         <div className={styles.post__title}>

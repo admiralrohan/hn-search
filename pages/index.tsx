@@ -1,7 +1,7 @@
 import Head from "next/head";
-import Link from "next/link";
 import React, { FormEventHandler, useEffect, useRef, useState } from "react";
 import AlertLayout from "../src/components/AlertLayout";
+import Header from "../src/components/Header";
 import HomePostItem from "../src/components/HomePostItem";
 import { BASE_URL, DEBOUNCE_DELAY } from "../src/constants";
 import useDebounce from "../src/hooks/useDebounce";
@@ -48,19 +48,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header className={styles.header}>
-        <div className={styles.logo}>
-          <Link href={"/"}>HN Search</Link>
-        </div>
-        <div className={styles.searchbox}>
-          <input
-            type="text"
-            placeholder="Search stories by title, url, or author"
-            value={searchTerm}
-            onInput={onSearchTermChange}
-          />
-        </div>
-      </header>
+      <Header searchTerm={searchTerm} onSearchTermChange={onSearchTermChange} />
 
       <main className={styles.main}>
         {requestStatus === "loading" && <AlertLayout content="Loading..." />}
