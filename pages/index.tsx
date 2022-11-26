@@ -2,6 +2,7 @@ import React, { FormEventHandler, useEffect, useState } from "react";
 import AlertLayout from "../src/components/AlertLayout";
 import Header from "../src/components/Header";
 import HomePostItem from "../src/components/HomePostItem";
+import Pagination from "../src/components/Pagination";
 import { BASE_URL, DEBOUNCE_DELAY } from "../src/constants";
 import useDebounce from "../src/hooks/useDebounce";
 import { SearchResult } from "../src/interfaces/search-result";
@@ -10,6 +11,7 @@ import styles from "../styles/Home.module.css";
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
   const [data, setData] = useState<SearchResult>();
+  const [page, setPage] = useState<number>(0);
   const [requestStatus, setRequestStatus] = useState<
     "idle" | "loading" | "error" | "success"
   >("idle");
@@ -22,7 +24,7 @@ export default function Home() {
   useEffect(() => {
     const fetchResults = async () => {
       const result = await fetch(
-        `${BASE_URL}/v1/search?query=${debouncedSearchTerm}`
+        `${BASE_URL}/v1/search?query=${debouncedSearchTerm}&page=${page}`
       );
       const data = await result.json();
 
@@ -37,7 +39,7 @@ export default function Home() {
 
     setRequestStatus("loading");
     fetchResults();
-  }, [debouncedSearchTerm]);
+  }, [debouncedSearchTerm, page]);
 
   return (
     <div className={styles.container}>
@@ -60,6 +62,15 @@ export default function Home() {
 
         {requestStatus === "error" && (
           <AlertLayout content="Some error occurred, refresh the page" />
+        )}
+
+        {requestStatus === "success" && data && (
+          <Pagination
+            currentPage={page}
+            setPage={(p) => setPage(p)}
+            // Subtracting 1 to convert to zero-based indexing
+            highestPossiblePage={data.nbPages - 1}
+          />
         )}
       </main>
     </div>
