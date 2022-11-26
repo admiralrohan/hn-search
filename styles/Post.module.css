@@ -51,3 +51,8 @@
   color: var(--gray);
   margin-bottom: 32px;
 }
+
+/* To remove margins from all descendant childrens. Used for `innerHTML` where we can't directly apply CSS. */
+.remove-margin * {
+  margin: 0;
+}

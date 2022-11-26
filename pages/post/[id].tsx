@@ -20,13 +20,28 @@ export default function Post({ data: post }: IPostProps) {
 
       <main className={styles.main}>
         <div className={styles.post__title}>
-          <Link href={post.url || "#"} className={styles.post__name}>
-            {post.title}
-          </Link>{" "}
           {post.url && (
-            <Link href={post.url} target="_blank" className={styles.post__url}>
-              {post.url}
-            </Link>
+            <>
+              <Link href={post.url} className={styles.post__name}>
+                {post.title}
+              </Link>{" "}
+              <Link
+                href={post.url}
+                target="_blank"
+                className={styles.post__url}
+              >
+                {post.url}
+              </Link>
+            </>
+          )}
+
+          {post.title && <div className={styles.post__name}>{post.title}</div>}
+
+          {!post.title && (
+            <div
+              dangerouslySetInnerHTML={{ __html: post.text || "" }}
+              className={styles["remove-margin"]}
+            />
           )}
         </div>
 
