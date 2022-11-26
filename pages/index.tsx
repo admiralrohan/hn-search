@@ -64,7 +64,7 @@ export default function Home() {
           <AlertLayout content="Some error occurred, refresh the page" />
         )}
 
-        {requestStatus === "success" && data && (
+        {requestStatus === "success" && data && data.hits.length > 0 && (
           <Pagination
             currentPage={page}
             setPage={(p) => setPage(p)}
