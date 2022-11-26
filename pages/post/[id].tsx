@@ -37,10 +37,15 @@ export default function Post({ data: post }: IPostProps) {
 
           {post.title && <div className={styles.post__name}>{post.title}</div>}
 
-          {!post.title && (
+          {/* Only remove top and bottom margins if post has no title */}
+          {post.text && (
             <div
-              dangerouslySetInnerHTML={{ __html: post.text || "" }}
-              className={styles["remove-margin"]}
+              dangerouslySetInnerHTML={{ __html: post.text }}
+              className={
+                post.title
+                  ? [styles["remove-margin"], styles.post__body].join(" ")
+                  : styles["remove-margin"]
+              }
             />
           )}
         </div>

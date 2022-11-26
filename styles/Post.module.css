@@ -51,6 +51,11 @@
   color: var(--gray);
   margin-bottom: 32px;
 }
+.post__body {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  color: var(--gray);
+}
 
 /* To remove margins from all descendant childrens. Used for `innerHTML` where we can't directly apply CSS. */
 .remove-margin * {
