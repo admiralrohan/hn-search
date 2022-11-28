@@ -44,6 +44,7 @@ export default function Pagination({
               strokeLinecap="round"
               strokeLinejoin="round"
             >
+              <title>Go to first page</title>
               <polyline points="11 17 6 12 11 7"></polyline>
               <polyline points="18 17 13 12 18 7"></polyline>
             </svg>
@@ -80,6 +81,7 @@ export default function Pagination({
               strokeLinecap="round"
               strokeLinejoin="round"
             >
+              <title>Go to last page</title>
               <polyline points="13 17 18 12 13 7"></polyline>
               <polyline points="6 17 11 12 6 7"></polyline>
             </svg>
