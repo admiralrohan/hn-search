@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react";
 import Pagination from "../components/Pagination";
-import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import { UserEvent } from "@testing-library/user-event/setup/setup";
 import { getArrayRange } from "../utils/get-array-range";
