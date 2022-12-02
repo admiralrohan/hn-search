@@ -23,7 +23,7 @@ export default function Header({
       {showSearchBox && (
         <div className={styles.searchbox}>
           <input
-            type="text"
+            type="search"
             placeholder="Search stories by title, url, or author"
             value={searchTerm}
             onInput={onSearchTermChange}

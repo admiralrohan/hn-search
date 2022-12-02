@@ -2,7 +2,7 @@ export interface PostDetail {
   id: number;
   created_at: string;
   created_at_i: number;
-  type: Type;
+  type: string;
   author: null | string;
   title: null | string;
   url: null | string;
@@ -12,9 +12,4 @@ export interface PostDetail {
   story_id: number | null;
   children: PostDetail[];
   options: any[];
-}
-
-export enum Type {
-  Comment = "comment",
-  Story = "story",
 }

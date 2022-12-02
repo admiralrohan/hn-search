@@ -7,7 +7,7 @@ export interface SearchResult {
   exhaustiveNbHits: boolean;
   exhaustiveTypo: boolean;
   exhaustive: Exhaustive;
-  query: Query;
+  query: string;
   params: string;
   processingTimeMS: number;
   processingTimingsMS: ProcessingTimingsMS;
@@ -19,18 +19,19 @@ export interface Exhaustive {
 }
 
 export interface Hit {
-  created_at: Date;
-  title: string;
+  created_at: string;
+  title: string | null;
   url: string | null;
   author: string;
   points: number;
-  story_text: null;
+  relevancy_score?: number;
+  story_text: string | null;
   comment_text: null;
-  num_comments: number;
+  num_comments: number | null;
   story_id: null;
   story_title: null;
   story_url: null;
-  parent_id: null;
+  parent_id: number | null;
   created_at_i: number;
   _tags: string[];
   objectID: string;
@@ -38,30 +39,22 @@ export interface Hit {
 }
 
 export interface HighlightResult {
-  title: Author;
-  url: Author;
-  author: Author;
+  title?: MatchedResult;
+  url?: MatchedResult;
+  author?: MatchedResult;
+  story_text?: MatchedResult;
 }
 
-export interface Author {
+export interface MatchedResult {
   value: string;
-  matchLevel: MatchLevel;
-  matchedWords: Query[];
+  matchLevel: string;
+  matchedWords: string[];
   fullyHighlighted?: boolean;
-}
-
-export enum MatchLevel {
-  Full = "full",
-  None = "none",
-}
-
-export enum Query {
-  Web3 = "web3",
 }
 
 export interface ProcessingTimingsMS {
   afterFetch: AfterFetch;
-  fetch: Fetch;
+  fetch?: Fetch;
   total: number;
 }
 

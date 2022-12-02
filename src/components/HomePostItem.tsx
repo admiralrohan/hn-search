@@ -12,7 +12,6 @@ export default function HomePostItem({ post }: { post: Hit }) {
   return (
     <li className={styles.post}>
       <div className={styles.post__title}>
-        {/* {post.url && */}
         <Link href={postLink} className={styles.post__name}>
           {post.title}
         </Link>{" "}
